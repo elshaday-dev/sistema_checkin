@@ -1,59 +1,55 @@
 <template>
-    <!-- <a href="https://linktr.ee/el_shaday" target="_blank" rel="noopener">NOVA ALIANÇA EL SHADAY</a>. -->
-
     <div class="wrapper-form">
         <div class="card-glass">
-
             <div class="card-glass-header">
                 <div class="glass-header-text">Cadastro de encontristas</div>
             </div>
-
             <form @submit.prevent="submitForm" class="glass-container">
                 <div class="form-glass-group">
                     <label for="nomeCompleto"></label>
-                    <input type="text" id="nomeCompleto" class="form-glass-control" v-model="form.nomeCompleto"
+                    <input type="text" id="nomeCompleto" class="form-glass-control" v-model="form.name"
                         placeholder="Nome Completo">
                 </div>
                 <div class="form-glass-group">
                     <label for="lider"></label>
-                    <input type="text" id="lider" class="form-glass-control" v-model="form.lider" placeholder="Líder" />
+                    <input type="text" id="lider" class="form-glass-control" v-model="form.leader" placeholder="Líder" />
                 </div>
                 <button type="submit" class="btn scale-up-center">Cadastrar</button>
+                <div>
+                  <button class="btn scale-up-center-back" @click="voltar()">
+                    Voltar para Home
+                  </button>
+                </div>
             </form>
-
         </div>
     </div>
-
-    <!-- <div>
-        <div>
-            <h1>Página Inicial</h1>
-            <router-link to="/outra-pagina">Ir para Outra Página</router-link>
-        </div>
-    </div> -->
 </template>
   
 <script>
-// import axios from "axios";
+import axios from "axios";
 
 export default {
     name: 'HomeCadastro',
     data() {
         return {
             form: {
-                nomeCompleto: "",
-                lider: "",
+                name: "",
+                leader: "",
             },
         };
     },
     methods: {
+      voltar() {
+        this.$router.push('/')
+      },
         async submitForm() {
-            console.log('Its work');
-            // try {
-            //     const response = await axios.post("/form-data", this.form);
-            //     console.log(response.data);
-            // } catch (error) {
-            //     console.error(error);
-            // }
+            try {
+                const response = await axios.post("https://backend-encontro.herokuapp.com/cadastrar", this.form);
+                window.alert(response.data.message);
+                this.form = { name: "", leader: "" }
+            } catch (error) {
+                window.alert(error.response.data.message);
+            }
         },
     },
 };
@@ -76,9 +72,7 @@ body {
 }
 
 .wrapper-form {
-    /* background-image: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%); */
-    /* background-size: cover; */
-    /* background-position: center; */
+    margin-bottom: 70%;
     width: 100%;
     min-height: 100vh;
     display: flex;
@@ -92,6 +86,7 @@ body {
 .card-glass {
     position: relative;
     width: 944px;
+    background-color: rgb(238, 241, 244);
     background: radial-gradient(100.21% 271.27% a t 2.81% 7.08%, rgba(255, 252, 252, 0.3) 0%, rgba(250, 250, 250, 0.07) 100%);
     border: 1px solid rgba(255, 255, 255, 0.2);
     box-shadow: 30px 20px 70px rgba(0, 0, 0, 0.1);
@@ -136,7 +131,7 @@ input.form-glass-control {
     font-size: 1.5em;
     color: var(--color-common);
     background: rgba(193, 193, 193, 0.09);
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1), 0px -2px 5px rgba(255, 255, 255, 0.5);
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1), 0px -2px 5px rgba(137, 137, 137, 0.5);
     border-radius: 15px;
     margin: 15px auto;
 }
@@ -166,6 +161,10 @@ input.form-glass-control::placeholder {
 .scale-up-center:hover {
     -webkit-animation: scale-up-center 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
     animation: scale-up-center 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+}
+.scale-up-center-back:hover {
+  -webkit-animation: scale-up-center 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+  animation: scale-up-center 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
 }
 
 @-webkit-keyframes scale-up-center {
