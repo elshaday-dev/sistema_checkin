@@ -3,6 +3,7 @@ import App from './App.vue'
 import CadastroHome from './components/CadastroHome.vue'
 import HomeCadastro from './components/HomeCadastro.vue'
 import CheckIn from './components/CheckIn.vue'
+import CheckFinal from './components/CheckFinal.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import { VuePusher } from 'vue-pusher';
 import Pusher from 'pusher-js';
@@ -23,7 +24,12 @@ const routes = [
     path: '/check-in',
     name: 'CheckIn',
     component: CheckIn
-  }
+  },
+  {
+    path: '/check-final',
+    name: 'CheckFinal',
+    component: CheckFinal
+  },
 ]
 
 const router = createRouter({
