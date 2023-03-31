@@ -165,8 +165,8 @@ export default {
             await axios.delete(`https://backend-encontro.herokuapp.com/remover/${id}`)
                 .then(response => {
                     // console.log(response);
-                    alert(response.data.message);
-                    const index = this.items.findIndex(e => e._id == id)
+                    // alert(response.data.message);
+                    const index = this.items.findIndex(e => e._id == response.deletedUser._id)
                     this.items.splice(index, 1)
                     // location.reload();
                 })
