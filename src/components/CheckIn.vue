@@ -37,9 +37,9 @@
                     <p>Faz uso de alguma medicação ou possui alguma alergia?</p>
                     <div class="form-radio">
                         <label for="sim">Sim</label>
-                    <input id="sim" name="alergia" type="radio" value="true" v-model="alergia">
+                        <input id="sim" name="alergia" type="radio" value="true" v-model="alergia">
                         <label for="nao">Não</label>
-                    <input id="nao" name="alergia" type="radio" value="false" v-model="alergia">
+                        <input id="nao" name="alergia" type="radio" value="false" v-model="alergia">
                     </div>
                 </div>
 
@@ -55,11 +55,37 @@
 
             </form>
         </div>
+
         <h1>Lista de Possíveis Encontristas:</h1>
-        <div v-for="item in items" :key="item.id">
-            {{ item.name }}
-            <button @click="abrirModal(item)">Adicionar informações</button>
+
+        <div class="container">
+            <table class="rwd-table">
+                <tr>
+                    <th>Encontrista</th>
+                    <th>Lider</th>
+                    <th>Acoes</th>
+                </tr>
+                <tr v-for="item in items" :key="item.id">
+                    <td data-th="Movie Title">{{ item.name }}</td>
+                    <td data-th="Movie Title">{{ item.leader }}</td>
+                    <td class="btns">
+                        <button class="btn open" @click="abrirModal(item)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                <path fill="currentColor"
+                                    d="m21.1 12.5l1.4 1.41l-6.53 6.59L12.5 17l1.4-1.41l2.07 2.08l5.13-5.17M10 17l3 3H3v-2c0-2.21 3.58-4 8-4l1.89.11L10 17m1-13a4 4 0 0 1 4 4a4 4 0 0 1-4 4a4 4 0 0 1-4-4a4 4 0 0 1 4-4Z" />
+                            </svg>
+                        </button>
+                        <button class="btn close" @click="remover(item._id)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                <path fill="currentColor"
+                                    d="M19 4h-3.5l-1-1h-5l-1 1H5v2h14M6 19a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7H6v12Z" />
+                            </svg>
+                        </button>
+                    </td>
+                </tr>
+            </table>
         </div>
+
     </div>
 </template>
   
@@ -71,7 +97,7 @@ export default {
     data() {
         return {
             items: [],
-            modalAberto: true,
+            modalAberto: false,
             form: {
                 name: '',
                 leader: '',
@@ -114,10 +140,23 @@ export default {
                 allergy: '',
                 baggage: null,
             }
-        }
+        },
+        async remover(id) {
+            await axios.delete(`https://backend-encontro.herokuapp.com/remover/${id}`)
+                .then(response => {
+                    // console.log(response);
+                    alert(response.data.message);
+                    location.reload();
+                })
+                .catch(error => {
+                    alert(error.response.data.message);
+                    // console.log(error);
+                });
+        },
     }
 }
 </script>
+
 <style>
 #modal {
     position: absolute;
@@ -164,9 +203,150 @@ export default {
     max-height: 100px;
     margin: 0 auto;
 }
-.form-radio{
+
+.form-radio {
     display: flex;
-  justify-content: center;
-  margin: 5%;
+    justify-content: center;
+    margin: 5%;
 }
-</style>
+
+h1 {
+    margin-bottom: 2rem;
+}
+
+@import "https://fonts.googleapis.com/css?family=Montserrat:300,400,700";
+
+.container {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.rwd-table {
+    margin: 1em 0;
+    width: 500px;
+    min-width: 300px;
+    max-width: 500px;
+}
+
+.rwd-table .btns {
+    display: flex;
+    align-items: center;
+}
+
+.rwd-table .btn {
+    border-radius: 50%;
+    padding: 10px;
+    /* width: 10px; */
+    /* height: 10px; */
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.rwd-table .btn.open {
+    /* border: solid 2px green; */
+    background-color: green;
+    /* background-color: greenyellow; */
+}
+
+.rwd-table .btn.close {
+    /* border: solid 2px red; */
+    background-color: red;
+    /* background-color: rgb(255, 123, 123); */
+}
+
+.rwd-table tr {
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+}
+
+.rwd-table th {
+    display: none;
+}
+
+.rwd-table td {
+    /* display: block; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rwd-table td:first-child {
+    padding-top: .5em;
+}
+
+.rwd-table td:last-child {
+    padding-bottom: .5em;
+}
+
+.rwd-table td:before {
+    content: attr(data-th) ": ";
+    font-weight: bold;
+    width: 6.5em;
+    display: inline-block;
+}
+
+@media (min-width: 480px) {
+    .rwd-table td:before {
+        display: none;
+    }
+}
+
+.rwd-table th,
+.rwd-table td {
+    text-align: left;
+}
+
+@media (min-width: 480px) {
+
+    .rwd-table th,
+    .rwd-table td {
+        display: flex;
+        padding: .25em .5em;
+    }
+
+    .rwd-table th:first-child,
+    .rwd-table td:first-child {
+        padding-left: 0;
+    }
+
+    .rwd-table th:last-child,
+    .rwd-table td:last-child {
+        padding-right: 0;
+    }
+}
+
+.rwd-table {
+    background: #34495E;
+    color: #fff;
+    border-radius: .4em;
+    overflow: hidden;
+}
+
+.rwd-table tr {
+    border-color: #46637f;
+}
+
+.rwd-table th,
+.rwd-table td {
+    margin: .5em 1em;
+}
+
+@media (min-width: 480px) {
+
+    .rwd-table th,
+    .rwd-table td {
+        padding: 1em !important;
+    }
+}
+
+.rwd-table th,
+.rwd-table td:before {
+    color: #dd5;
+}</style>
