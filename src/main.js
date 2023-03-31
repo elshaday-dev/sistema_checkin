@@ -7,6 +7,8 @@ import CheckFinal from './components/CheckFinal.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import { VuePusher } from 'vue-pusher';
 import Pusher from 'pusher-js';
+import VueToast from 'vue-toast-notification';
+import 'vue-toast-notification/dist/theme-sugar.css';
 Pusher.logToConsole = true;
 
 const routes = [
@@ -39,13 +41,13 @@ const router = createRouter({
 
 const app = createApp(App)
 
-app.use(router).use(VuePusher, {
+app.use(router).use(VueToast).use(VuePusher, {
   api_key: 'b9fd36fe72d986cec08f',
   options: {
     cluster: 'us2',
     forceTLS: true,
     authTransport: 'jsonp'
   }
-});
+})
 
 app.mount('#app')
