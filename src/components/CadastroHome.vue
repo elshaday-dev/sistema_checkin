@@ -69,20 +69,21 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 1%;
+  margin-top: 30px;
 }
 .home svg {
   display: block;
   margin: 0 auto;
+  width: 300px;
 }
 .row {
   display: flex;
   justify-content: center;
-  gap: 10%;
+  gap: 10px;
 }
 
 .button {
-  width: 16%;
+  width: 200px;
 }
 
 .button:first-child {
@@ -90,10 +91,11 @@ export default {
 }
 
 .button button {
+  cursor: pointer;
   padding: 2%;
   width: 100%;
-  font-size: 200%;
   border-radius: 10px;
+  font-size: 22px;
 }
 .button button {
   padding: 2%;

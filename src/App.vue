@@ -31,4 +31,7 @@ img {
   width: 100px;
   height: 100px;
 }
+.btn {
+  cursor: pointer;
+}
 </style>
