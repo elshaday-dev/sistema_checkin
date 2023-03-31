@@ -50,6 +50,9 @@
        <button class="btn scale-up-center-back" @click="closeModal()">
         Fechar
        </button>
+       <button class="btn scale-up-center-back" @click="removeCheckin()">
+        Remover Check-in
+       </button>
       </div>
      </div>
     </div>
@@ -78,6 +81,9 @@ export default {
    items: [],
    showModalValue: false,
    selectedItem: null,
+   form: {
+    check: false,
+   },
   };
  },
  created() {
@@ -91,6 +97,22 @@ export default {
    });
  },
  methods: {
+  async removeCheckin() {
+   await axios
+    .patch(
+     `https://backend-encontro.herokuapp.com/atualizar/${this.selectedItem._id}`,
+     this.form
+    )
+    .then(() => {
+     const index = this.items.findIndex((e) => e._id == this.selectedItem._id);
+     this.items.splice(index, 1);
+     this.closeModal();
+     // location.reload();
+    })
+    .catch((error) => {
+     console.log(error);
+    });
+  },
   inscritos() {
    this.$router.push("/check-in");
   },
@@ -103,6 +125,7 @@ export default {
   },
   closeModal() {
    this.showModalValue = false;
+   this.selectedItem = null;
   },
  },
 };

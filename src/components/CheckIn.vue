@@ -131,8 +131,15 @@
   <h1>Inscritos:</h1>
 
   <div class="container">
+   <div class="search-wrapper">
+    <input
+     type="text"
+     v-model="searchQuery"
+     placeholder="Digite para pesquisar..."
+    />
+   </div>
    <ul class="participants-list">
-    <li v-for="(item, index) in items" :key="index">
+    <li v-for="(item, index) in filteredItems" :key="index">
      <div class="participant-name">{{ item.name }}</div>
      <div class="participant-leader">Líder: {{ item.leader }}</div>
      <div class="participant-actions">
@@ -187,6 +194,7 @@ export default {
  name: "ListagemDeItens",
  data() {
   return {
+   searchQuery: "",
    items: [],
    id_delete: "",
    modalAberto: false,
@@ -235,6 +243,16 @@ export default {
    this.items.splice(index, 1);
   });
  },
+ computed: {
+  filteredItems() {
+   if (this.searchQuery.trim() === "") {
+    return this.items;
+   }
+   return this.items.filter((item) =>
+    item.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+   );
+  },
+ },
  methods: {
   async checkin() {
    this.form.check = true;
@@ -262,6 +280,7 @@ export default {
   abrirModal(person) {
    this.modalAberto = true;
    this.form = person;
+   window.scrollTo(0, 0);
   },
   showModalConfirm(id) {
    this.id_delete = id;
@@ -308,6 +327,29 @@ export default {
 </script>
 
 <style>
+.search-wrapper {
+ display: flex;
+ justify-content: center;
+ margin-bottom: 20px;
+}
+
+.search-wrapper input[type="text"] {
+ width: 100%;
+ max-width: 400px;
+ padding: 12px 20px;
+ margin: 8px 0;
+ box-sizing: border-box;
+ border: 2px solid #ccc;
+ border-radius: 4px;
+ font-size: 16px;
+ background-color: white;
+ transition: 0.3s;
+}
+
+.search-wrapper input[type="text"]:focus {
+ border: 2px solid #3f51b5;
+ outline: none;
+}
 #modal {
  position: absolute;
  top: 0;
