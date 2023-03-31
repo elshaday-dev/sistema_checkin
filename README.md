@@ -1,5 +1,3 @@
-# sistema_de_checkin
-
 ## Project setup
 ```
 npm install
