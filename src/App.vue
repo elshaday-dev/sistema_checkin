@@ -1,6 +1,6 @@
 <template>
   <div>
-    <img alt="Vue logo" src="./assets/logo_igreja.png" />
+    <div class="pano"></div>
     <RouterView></RouterView>
   </div>
 </template>
@@ -15,12 +15,15 @@ export default {
 </script>
 
 <style>
+body {
+  background-color: rgb(27, 27, 27);
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #ffffff;
   margin-top: 60px;
 }
 img {
