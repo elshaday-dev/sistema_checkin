@@ -1,58 +1,104 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
+    <h1>Cadastro de encontristas</h1>
     <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
+      Igreja Evangélica
+      <a href="https://linktr.ee/el_shaday" target="_blank" rel="noopener"
+        >NOVA ALIANÇA EL SHADAY</a
+      >.
     </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
+  </div>
+  <div>
+    <form @submit.prevent="submitForm">
+      <div class="form-group">
+        <label for="nomeCompleto"></label>
+        <input
+          type="text"
+          id="nomeCompleto"
+          v-model="form.nomeCompleto"
+          placeholder="Nome Completo"
+        />
+      </div>
+      <div class="form-group">
+        <label for="numeroCelular"></label>
+        <input
+          type="text"
+          id="numeroCelular"
+          v-model="form.numeroCelular"
+          placeholder="Número de Celular"
+        />
+      </div>
+      <div class="form-group">
+        <label for="lider"></label>
+        <input
+          type="text"
+          id="lider"
+          v-model="form.lider"
+          placeholder="Líder"
+        />
+      </div>
+      <div class="form-group">
+        <label for="formaPagamento"></label>
+        <select id="formaPagamento" class="form-control">
+          <option disabled selected>Selecione a forma de pagamento</option>
+          <option>Pix</option>
+          <option>Cartão de crédito</option>
+          <option>Dinheiro</option>
+        </select>
+        <button type="submit">Enviar</button>
+      </div>
+    </form>
+    <div>
+      <h1>Página Inicial</h1>
+      <router-link to="/cadastro">Ir para Outra Página</router-link>
+    </div>
   </div>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
-  name: 'HelloWorld',
-  props: {
-    msg: String
-  }
-}
+  data() {
+    return {
+      form: {
+        nomeCompleto: "",
+        numeroCelular: "",
+        lider: "",
+        formaPagamento: "",
+        pago: false,
+      },
+    };
+  },
+  methods: {
+    async submitForm() {
+      try {
+        const response = await axios.post("/form-data", this.form);
+        console.log(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+  },
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
+.form-group {
+  width: 25%;
+  margin: 0 auto;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 5px;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
+
+select {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 5px;
+  margin-bottom: 10px;
 }
 </style>
