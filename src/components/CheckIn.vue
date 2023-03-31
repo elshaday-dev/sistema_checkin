@@ -91,6 +91,7 @@
   
 <script>
 import axios from 'axios';
+import Pusher from 'pusher-js';
 
 export default {
     name: 'ListagemDeItens',
@@ -98,6 +99,7 @@ export default {
         return {
             items: [],
             modalAberto: false,
+            channel: null,
             form: {
                 name: '',
                 leader: '',
@@ -112,7 +114,7 @@ export default {
             alergia: 'false',
         }
     },
-    created() {
+    mounted() {
         axios.get('https://backend-encontro.herokuapp.com/listar')
             .then(response => {
                 this.items = response.data.users;
@@ -120,6 +122,24 @@ export default {
             .catch(error => {
                 console.log(error);
             });
+        const pusher = new Pusher('b9fd36fe72d986cec08f', {
+            cluster: 'us2',
+            authEndpoint: '/pusher/auth',
+            auth: {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
+            },
+        });
+
+        this.channel = pusher.subscribe('my-channel');
+        this.channel.bind('new-user', res => {
+            this.items.push(res.newUser)
+        });
+        this.channel.bind('remove-user', res => {
+            const index = this.items.findIndex(e => e._id == res.deletedUser._id)
+            this.items.splice(index, 1)
+        });
     },
     methods: {
         abrirModal(person) {
@@ -146,7 +166,9 @@ export default {
                 .then(response => {
                     // console.log(response);
                     alert(response.data.message);
-                    location.reload();
+                    const index = this.items.findIndex(e => e._id == id)
+                    this.items.splice(index, 1)
+                    // location.reload();
                 })
                 .catch(error => {
                     alert(error.response.data.message);
