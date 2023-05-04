@@ -15,6 +15,17 @@
     </div>
 
     <div class="form-input">
+      <label for="age">Idade</label>
+      <input
+       required
+       id="age"
+       type="number"
+       placeholder="Idade"
+       v-model="form.age"
+      />
+     </div>
+
+    <div class="form-input">
      <label for="leader">Líder</label>
      <input
       required
@@ -206,6 +217,7 @@ export default {
     leader: "",
     number: null,
     numberFamily: null,
+    age: null,
     check: true,
     city: "",
     church: "",
@@ -298,6 +310,7 @@ export default {
     leader: "",
     number: null,
     numberFamily: null,
+    age: null,
     check: null,
     city: "",
     church: "",

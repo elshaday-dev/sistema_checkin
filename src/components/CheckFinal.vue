@@ -15,6 +15,9 @@
       <div class="card-info-item">
        <strong>Líder:</strong> {{ item.leader }}
       </div>
+      <div class="card-info-item">
+        <strong>Idade:</strong> {{ item.age }}
+       </div>
       <div class="card-info-item"><strong>Cidade:</strong> {{ item.city }}</div>
       <div class="card-info-item">
        <strong>Volumes:</strong> {{ item.baggage }}
@@ -31,6 +34,9 @@
       <div class="modal-info">
        <div class="modal-info-item">
         <strong>Líder:</strong> {{ selectedItem.leader }}
+       </div>
+       <div class="modal-info-item">
+        <strong>Idade:</strong> {{ selectedItem.age }}
        </div>
        <div class="modal-info-item">
         <strong>Telefone:</strong> {{ selectedItem.number }}
