@@ -11,8 +11,20 @@
                         placeholder="Nome Completo">
                 </div>
                 <div class="form-glass-group">
+                    <label for="idade"></label>
+                    <input type="text" id="idade" class="form-glass-control" v-model="form.age" placeholder="Idade" />
+                </div>
+                <div class="form-glass-group">
                     <label for="lider"></label>
-                    <input type="text" id="lider" class="form-glass-control" v-model="form.leader" placeholder="Líder" />
+                    <input type="text" id="lider" class="form-glass-control" v-model="form.leader" placeholder="Líder/Enviando" />
+                </div>
+                <div class="form-glass-group">
+                    <label for="responsavel"></label>
+                    <input type="text" id="responsavel" class="form-glass-control" v-model="form.responsor" placeholder="Responsável" />
+                </div>
+                <div class="form-glass-group">
+                    <label for="numberFamily"></label>
+                    <input type="text" id="numberFamily" class="form-glass-control" v-model="form.numberFamily" placeholder="Nº Responsável" />
                 </div>
                 <button type="submit" class="btn scale-up-center">Cadastrar</button>
                 <div>
