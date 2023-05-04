@@ -12,7 +12,7 @@
                 </div>
                 <div class="form-glass-group">
                     <label for="idade"></label>
-                    <input type="text" id="idade" class="form-glass-control" v-model="form.age" placeholder="Idade" />
+                    <input type="number" id="idade" class="form-glass-control" v-model="form.age" placeholder="Idade" />
                 </div>
                 <div class="form-glass-group">
                     <label for="lider"></label>
