@@ -11,8 +11,16 @@
                         placeholder="Nome Completo">
                 </div>
                 <div class="form-glass-group">
+                    <label for="idade"></label>
+                    <input type="text" id="idade" class="form-glass-control" v-model="form.age" placeholder="Idade" />
+                </div>
+                <div class="form-glass-group">
                     <label for="lider"></label>
-                    <input type="text" id="lider" class="form-glass-control" v-model="form.leader" placeholder="Líder" />
+                    <input type="text" id="lider" class="form-glass-control" v-model="form.leader" placeholder="Líder/Responsável" />
+                </div>
+                <div class="form-glass-group">
+                    <label for="numberFamily"></label>
+                    <input type="text" id="numberFamily" class="form-glass-control" v-model="form.numberFamily" placeholder="Nº Cel. Responsável" />
                 </div>
                 <button type="submit" class="btn scale-up-center">Cadastrar</button>
                 <div>
@@ -34,7 +42,9 @@ export default {
         return {
             form: {
                 name: "",
+                age: "",
                 leader: "",
+                numberFamily: "",
             },
         };
     },
@@ -46,7 +56,7 @@ export default {
             try {
                 const response = await axios.post("https://backend-encontro.herokuapp.com/cadastrar", this.form);
                 window.alert(response.data.message);
-                this.form = { name: "", leader: "" }
+                this.form = { name: "", age: "", leader: "", numberFamily: "" }
             } catch (error) {
                 window.alert(error.response.data.message);
             }
