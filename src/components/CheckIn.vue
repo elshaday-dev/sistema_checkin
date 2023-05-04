@@ -229,7 +229,7 @@ export default {
  },
  mounted() {
   axios
-   .get("https://backend-encontro.herokuapp.com/listar")
+   .get("https://encontro.herokuapp.com/listar")
    .then((response) => {
     this.items = response.data.users.filter((e) => !e.check);
    })
@@ -270,7 +270,7 @@ export default {
    this.form.check = true;
    await axios
     .patch(
-     `https://backend-encontro.herokuapp.com/atualizar/${this.form._id}`,
+     `https://encontro.herokuapp.com/atualizar/${this.form._id}`,
      this.form
     )
     .then(() => {
@@ -320,7 +320,7 @@ export default {
   },
   async remover() {
    await axios
-    .delete(`https://backend-encontro.herokuapp.com/remover/${this.id_delete}`)
+    .delete(`https://encontro.herokuapp.com/remover/${this.id_delete}`)
     .then((response) => {
      // console.log(response);
      // alert(response.data.message);

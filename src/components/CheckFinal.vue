@@ -94,7 +94,7 @@ export default {
  },
  created() {
   axios
-   .get("https://backend-encontro.herokuapp.com/listar")
+   .get("https://encontro.herokuapp.com/listar")
    .then((response) => {
     this.items = response.data.users.filter((e) => e.check === true);
    })
@@ -106,7 +106,7 @@ export default {
   async removeCheckin() {
    await axios
     .patch(
-     `https://backend-encontro.herokuapp.com/atualizar/${this.selectedItem._id}`,
+     `https://encontro.herokuapp.com/atualizar/${this.selectedItem._id}`,
      this.form
     )
     .then(() => {
