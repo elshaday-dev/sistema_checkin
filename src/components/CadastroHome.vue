@@ -61,15 +61,15 @@
    </svg>
   </div>
   <div>
-   <!-- <div class="row">
+   <div class="row">
       <div class="button">
         <button @click="navegarParaCadastro">CADASTRO</button>
       </div>
       <div class="button">
         <button @click="navegarParaCheckIn">CHECK-IN</button>
       </div>
-    </div> -->
-    Até o Próximo encontro!
+    </div>
+    <!-- Até o Próximo encontro! -->
   </div>
  </div>
 </template>
