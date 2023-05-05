@@ -202,6 +202,7 @@ import axios from "axios";
 import Pusher from "pusher-js";
 
 export default {
+ inject: ['apiUrl'],
  name: "ListagemDeItens",
  data() {
   return {
@@ -229,7 +230,7 @@ export default {
  },
  mounted() {
   axios
-   .get("https://encontro.herokuapp.com/listar")
+   .get(`${this.apiUrl}/listar`)
    .then((response) => {
     this.items = response.data.users.filter((e) => !e.check);
    })
@@ -270,7 +271,7 @@ export default {
    this.form.check = true;
    await axios
     .patch(
-     `https://encontro.herokuapp.com/atualizar/${this.form._id}`,
+     `${this.apiUrl}/atualizar/${this.form._id}`,
      this.form
     )
     .then(() => {
@@ -320,7 +321,7 @@ export default {
   },
   async remover() {
    await axios
-    .delete(`https://encontro.herokuapp.com/remover/${this.id_delete}`)
+    .delete(`${this.apiUrl}/remover/${this.id_delete}`)
     .then((response) => {
      // console.log(response);
      // alert(response.data.message);

@@ -81,6 +81,7 @@
 import axios from "axios";
 
 export default {
+ inject: ['apiUrl'],
  name: "ListagemFinal",
  data() {
   return {
@@ -94,7 +95,7 @@ export default {
  },
  created() {
   axios
-   .get("https://encontro.herokuapp.com/listar")
+   .get(`${this.apiUrl}/listar`)
    .then((response) => {
     this.items = response.data.users.filter((e) => e.check === true);
    })
@@ -106,7 +107,7 @@ export default {
   async removeCheckin() {
    await axios
     .patch(
-     `https://encontro.herokuapp.com/atualizar/${this.selectedItem._id}`,
+     `${this.apiUrl}/atualizar/${this.selectedItem._id}`,
      this.form
     )
     .then(() => {
