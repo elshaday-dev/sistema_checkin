@@ -40,6 +40,7 @@ const router = createRouter({
 })
 
 const app = createApp(App)
+app.provide('apiUrl', process.env.VUE_APP_API_URL);
 
 app.use(router).use(VueToast).use(VuePusher, {
   api_key: 'b9fd36fe72d986cec08f',
