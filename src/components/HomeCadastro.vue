@@ -54,7 +54,7 @@ export default {
       },
         async submitForm() {
             try {
-                const response = await axios.post("https://backend-encontro.herokuapp.com/cadastrar", this.form);
+                const response = await axios.post("https://encontro.herokuapp.com/cadastrar", this.form);
                 window.alert(response.data.message);
                 this.form = { name: "", age: "", leader: "", numberFamily: "" }
             } catch (error) {
