@@ -3,6 +3,7 @@ import App from './App.vue'
 import CadastroHome from './components/CadastroHome.vue'
 import HomeCadastro from './components/HomeCadastro.vue'
 import CheckIn from './components/CheckIn.vue'
+import SubscribesList from './views/Subscribes.vue'
 import CheckFinal from './components/CheckFinal.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import { VuePusher } from 'vue-pusher';
@@ -21,6 +22,11 @@ const routes = [
     path: '/cadastro',
     name: 'HomeCadastro',
     component: HomeCadastro
+  },
+  {
+    path: '/inscritos',
+    name: 'Subscribes',
+    component: SubscribesList
   },
   {
     path: '/check-in',
