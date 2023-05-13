@@ -70,7 +70,7 @@ export default {
 
 <style>
 body {
- background-color: rgb(27, 27, 27);
+ background-color: rgb(27, 27, 27) !important;
 }
 #app {
  font-family: Avenir, Helvetica, Arial, sans-serif;
